@@ -31,7 +31,7 @@ def _update_virtualenv():
     if not exists(".venv"):
         # if no '.env' install pipenv and add to PATH 
         run('export PIPENV_VENV_IN_PROJECT=1 && \
-            python3 -m pip install pipenv && \
+            python3 -m pip install --user pipenv && \
             PYTHON_BIN_PATH="$(python3 -m site --user-base)/bin" && \
             export PATH="$PATH:$PYTHON_BIN_PATH" && \
             pipenv install -r requirements.txt')
