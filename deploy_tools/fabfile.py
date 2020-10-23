@@ -42,7 +42,7 @@ def _create_or_update_dotenv():
     append('.env', f'SITENAME={env.host}')
     current_contents = run('cat .env')
     if 'DJANGO_SECRET_KEY' not in current_contents:
-        pool = string.ascii_letters + string.punctuation + string.digits
+        pool = string.ascii_letters + string.digits
         new_secret_key = ''.join(random.SystemRandom().choices(pool, k=50))
         append('.env', f'DJANGO_SECRET_KEY={new_secret_key}')
 
