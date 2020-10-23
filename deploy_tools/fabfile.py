@@ -4,7 +4,7 @@ from fabric.api import cd, env, local, run
 
 REPO_URL = 'https://github.com/MassDo/tuto-site.git'
 
-env.key_filename = ["/home/massdo/.ssh/massdo-to-do-list/dorian.pem"]
+env.key_filename = ["/home/tuto/.ssh/tuto.massdo/tuto.pem"]
 
 def deploy():
     site_folder = f'/home/{env.user}/sites/{env.host}'
