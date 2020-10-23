@@ -47,7 +47,7 @@ def _create_or_update_dotenv():
         append('.env', f'DJANGO_SECRET_KEY={new_secret_key}')
 
 def _update_static_files():
-    run('pipenv run ./manage.py collectstatic --noinput')
+    run('pipenv run python3 manage.py collectstatic --noinput')
 
 def _update_database():
-    run('pipenv run ./manage.py migrate --noinput')
+    run('pipenv run python3 manage.py migrate --noinput')
