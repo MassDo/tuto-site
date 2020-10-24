@@ -1,6 +1,6 @@
 {% load static %}
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" style="background-color: #848485;">
 <head>
     <meta charset="UTF-8"> 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,21 +10,22 @@
     <title>{% block title %}{% endblock title %}</title>
 </head>
 <div class="container" style='display: flex; justify-content: center;'>
-    <div class="block" style="max-width: 800px;">
+    <div class="block" style="max-width: 900px; min-width: 0; background-color: #f5ebe0; padding: 10px; border-radius: 20px;">
         <body>
-            <nav>
-                <ul>                    
-                    <li><a href="{% url 'prerequisites' %}">Prerequisites</a></li>                        
+            <nav id="sommaire"><h1>Liste des chapitres</h1>
+                <ul>                   
+                    <li><a href="{% url 'prerequisites' %}">Prerequisites - Conditions préalables.</a></li><br>                       
                     <li><a href="{% url 'article-detail' 1 %}">Chapitre 1 - Django et test fonctionnel.</a></li>
-                    <li><a href="{% url 'article-detail' 2 %}">Chap2</a></li>
-                    <li><a href="{% url 'article-detail' 3 %}">Chap3</a></li>
-                    <li><a href="{% url 'article-detail' 4 %}">Chap4</a></li>
-                    <li><a href="{% url 'article-detail' 5 %}">Chap5</a></li>        
+                    <li><a href="{% url 'article-detail' 2 %}">Chapitre 2 - Amélioration du TF et utilisation du module unittest.</a></li>
+                    <li><a href="{% url 'article-detail' 3 %}">Chapitre 3 - Test d'une page d'accueil</a></li>
+                    <li><a href="{% url 'article-detail' 4 %}">Chapitre 4 - Réusinage du code et templates</a></li> 
+                    <br>
+                    <li><a href="https://massdo-to-do-list.site/">Tester l'application ➡</a></li>      
                 </ul>  
             </nav>
             
             {% block article %}{% endblock article %}
-            <a href="{% url 'home' %}">Accueil</a>
+            <a href="#sommaire">Sommaire ⬆</a>
         </body>
     </div>
 </div>
