@@ -1,15 +1,15 @@
 # Chapitre 3 - Test d'une page d'accueil
 
-On a terminé notre chapitre précédent sur un TF (qui échoue), pour vérifier que notre page d'accueil contienne "To-Do" dans son titre. 
+On a terminé notre chapitre précédent sur un TF (qui échoue), pour vérifier que notre page d'accueil contient "To-Do" dans son titre. 
 
-Commencons a implémenter du code avec la démarche TDD ! 
+Commençons à implémenter du code avec la démarche TDD ! 
 
 On commence par ajouter une application "lists" à notre projet "superlists"
 ```bash
 $ ./manage.py startapp lists
 ```
 Django va créer un dossier lists (une application) contenant des fichiers dont un directement utile pour nous; test.py
-Votre arborescence doit maintenant ressembler a celle-ci:
+Votre arborescence doit maintenant ressembler à celle-ci:
 ```
 .
 ├── db.sqlite3
@@ -36,7 +36,7 @@ Votre arborescence doit maintenant ressembler a celle-ci:
 Nous allons écrire nos tests unitaires dans le module ./lists/test.py. Les tests unitaires (TU) sont ceux élaborés du point de vue technique. Vous commencez à voir la mécanique globale ? 
 > TF (point de vue utilisateur) => TU (point de vue réalisation technique) 
 
-Voici un exemplevolontairement faux, de test unitaire, dans notre module /lists/test.py :
+Voici un exemple volontairement faux, de test unitaire, dans notre module /lists/test.py :
 > lists/test.py
 ```python
 from django.test import TestCase
@@ -46,7 +46,7 @@ class ExampleTest(TestCase):
     def test_addition_in_parallel_universe(self):
         self.assertEqual(1+1, 3)
 ```
-On execute les tests unitaires de l'applications lists ainsi:
+On exécute les tests unitaires de l'applications lists ainsi:
 ```bash
 $ ./manage.py test lists/
 Creating test database for alias 'default'...
@@ -78,7 +78,7 @@ $ git commit -m "Add new app lists, with a failing UT"
 
 ## Django un framework M.V.T
 
-Allez, la encore un petit croquis, pour expliquer l'organisation en Modèles Vues Templates de Django:  
+Allez, là encore un petit croquis, pour expliquer l'organisation en Modèles Vues Templates de Django:  
 
 <image src="./images/django-simplifie.png" title="Django simplifié" alt="django-simplifé" style="border-radius:10px" border="2 solid" width="800" >
 
@@ -120,7 +120,7 @@ from django.shortcuts import render
 home_page = None
 ```
 Je vous entends d'ici dire "Mais c'est une blague !!!", On va pas autant décomposer ! 🤯  
-Ahah ! Pas d'inquiétude, on ira plus vite après, mais pour l'instant, on cherche à bien s'imprénier de la méthode ! 🤓  
+Ahah ! Pas d'inquiétude, on ira plus vite après, mais pour l'instant, on cherche à bien s'imprégner de la méthode ! 🤓  
 On lance les tests encore:
 ```bash
 $ ./manage.py test lists/
@@ -145,7 +145,7 @@ Ran 1 test in 0.001s
 FAILED (errors=1)
 Destroying test database for alias 'default'...
 ```
-On peut lire à la fin une exception [Resolver404](https://docs.djangoproject.com/fr/2.2/ref/exceptions/#django.urls.Resolver404) qui nous indique que le chemin ne correspond à aucune vue. En nous rappelant du dessin sur django [ci-dessus](#django-un-framework-mvt), nous allons nous rendre dans le modules superlists/urls.py pour résoudre ce problème.
+On peut lire à la fin une exception [Resolver404](https://docs.djangoproject.com/fr/2.2/ref/exceptions/#django.urls.Resolver404) qui nous indique que le chemin ne correspond à aucune vue. En nous rappelant du dessin sur django [ci-dessus](#django-un-framework-mvt), nous allons nous rendre dans le module superlists/urls.py pour résoudre ce problème.
 >superlists/urls.py
 ```python
 """superlists URL Configuration
@@ -170,7 +170,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
 ]
 ```
-On peut lire des commentaires bien utiles pour faire correspondre un chemin à une vue, utilisons la méthode path() indiqué pour faire correspondre le chemin racine vers notre vue 'home_page':
+On peut lire des commentaires bien utiles pour faire correspondre un chemin à une vue, utilisons la méthode path() indiquée pour faire correspondre le chemin racine vers notre vue 'home_page':
 > superlists/urls.py
 ```python
 from django.contrib import admin
@@ -234,7 +234,7 @@ class HomePageTest(TestCase):
         self.assertIn('<title>To-Do</title>', html)
         self.assertTrue(html.endswith('</html>'))
 ```
-Alors on vient de rajouter un test au titre explicite, laissez moi vous expliquer les étapes:
+Alors on vient de rajouter un test au titre explicite, laissez-moi vous expliquer les étapes:
 > - On instancie une requête depuis la classe [HttpRequest](https://docs.djangoproject.com/fr/3.1/ref/request-response/#django.http.HttpRequest)
 > - Cette requête est transmise à la vue home_page qui retourne une réponse.
 > - Cette réponse au contenu binaire est décodé en 'utf8'
@@ -251,7 +251,7 @@ $ ./manage.py test lists/
 [ ... ]
 TypeError: home_page() takes 0 positional arguments but 1 was given
 ```
-Ok modifions notre vue home_page pour quelle puisse prendre une requete en paramètre.  
+Ok, modifions notre vue home_page pour qu'elle puisse prendre une requête en paramètre.  
 
 __On ajuste :__
 > lists/views.py
@@ -335,11 +335,11 @@ Ran 2 tests in 0.002s
 OK
 Destroying test database for alias 'default'...
 ```
-Ok c'est bon les TU passent !! :)  🚀  
+Ok, c'est bon les TU passent !! :)  🚀  
 Bon on aurait pu écrire le code plus vite mais c'était pour vous montrer le processus d'itération et la recherche de la plus petite implémentation de code à chaque étape. TDD !  
 
-Bon maintenant que nos TU passent vérifions notre TF.  
-(N'oubliez pas de lancer votre server avec ```./manage runserver```)
+Bon maintenant que nos TU passent vérifions notre test fonctionnel.  
+(N'oubliez pas de lancer votre serveur avec ```./manage runserver```)
 
 __TF :__
 > functional_tests.py
@@ -359,12 +359,12 @@ Ran 1 test in 4.425s
 
 FAILED (failures=1)
 ```
-Quoi ! Le test fonctionnel ne passe pas ?! Ah si c'était la méthode fail() que nous avions mise pour faire échouer le test si celui ci n'était pas terminé ! Ouf notre travail à payé ! #HappyFace
-Nous avons implémenté une page web avec "To-Do" dans le titre, le tout en BDD et TDD avec tests fonctionnel automatique ! Félicitation !
+Quoi ! Le test fonctionnel ne passe pas ?! Ah si c'était la méthode fail() que nous avions mise pour faire échouer le test si celui-ci n'était pas terminé ! Ouf notre travail a payé ! #HappyFace
+Nous avons implémenté une page web avec "To-Do" dans le titre, le tout en BDD et TDD avec test fonctionnel automatique ! Félicitations !
 
 <image src="./images/chap3-todo.png" alt="todo title" title="Title is 'To-Do'" style="border-radius:10px" border="2 solid" width="800">
 
-Ca mérite bien un ptit commit, allez:  
+Ca mérite bien un p'tit commit, allez !  
   
 ```bash
 $ git commit -am "home_page view returns minimal HTML"
@@ -382,7 +382,7 @@ Maintenant on sait:
 > - [x] Démarrer une application Django
 > - [x] Utiliser la commande ./manage.py test 
 > - [x] La différence entre TF et TU.
-> - [x] La résolution de chemin d'url vers les vues associé grace à Urls.py
+> - [x] La résolution de chemin d'url vers les vues associées grâce à Urls.py
 > - [x] Une vue et les objets request et response.
 > - [x] Retourner un HTMLbasique.
 

@@ -1,14 +1,14 @@
 # Chapitre 2 - Amélioration du TF et utilisation du module unittest.
 
-Bon, par ou commencer pour répondre à notre user storie du chapitre précédent, et faire notre app todo-list ?  
+Bon, par où commencer pour répondre à notre user storie du chapitre précédent, et faire notre app todo-list ?  
 
-Nous allons nous faire guider par un test fonctionnel ! il nous aidera à "cerner" notre "Minimum Viable App" soit la chose la plus simple que nous pouvons construire, pour répondre à la fonctionnalitée découlant de la user storie.
+Nous allons nous faire guider par un test fonctionnel ! il nous aidera à "cerner" notre "Minimum Viable App" soit la chose la plus simple que nous pouvons construire, pour répondre à la fonctionnalité découlant de la user storie.
 
 >Pour rappel notre user storie:  
 >
 > __En tant__ <font color="DC143C">qu'utilisateur d'un navigateur web,</font> __Je veux__ <font color="483D8B">pouvoir ajouter des notes, </font> __Afin que__  <font color="008000">je puisse les retrouver plus tard.</font>
 
-C'est parti modifions notre ./functional_tests.py en y ajoutant en commentaires les scénarios de tests du chapitre précédent:
+C'est parti, modifions notre ./functional_tests.py en y ajoutant en commentaires les scénarios de tests du chapitre précédent:
 
 ```python
 from selenium import webdriver
@@ -48,13 +48,13 @@ Traceback (most recent call last):
     assert 'To-Do' in browser.title
 AssertionError
 ```
-C'est ce quon appel une 'expected fail' car nous attendions cette erreur. En effet 'To-Do' ne peut pas etre dans le titre de la page car nous n'avons rien implémenté encore.
+C'est ce qu'on appelle une 'expected fail' car nous attendions cette erreur. En effet 'To-Do' ne peut pas être dans le titre de la page car nous n'avons rien implémenté encore.
 
 ## Module Unittest:
 
 Pour formater la visibilité des messages d'erreurs des tests, le module python unittest est disponible, nous allons l'utiliser!
 
-Changons à nouveau notre TF:
+Changeons à nouveau notre TF:
 > functional_test.py
 ```python
 from selenium import webdriver
@@ -86,16 +86,16 @@ if __name__ == '__main__':
     unittest.main()
 ```
 ### Alors ...
-on place notre test dans une classe qui hérite de unittest.TestCase et on défini nos test avec un titre explicite qui commence par test_ pour être pris en compte.  
+on place notre test dans une classe qui hérite de unittest.TestCase et on définit nos tests avec un titre explicite qui commence par test_ pour être pris en compte.  
 
-De plus la classe TestCase du module unittest nous permet d'utiliser des methodes biens pratiques!
+De plus, la classe TestCase du module unittest nous permet d'utiliser des méthodes bien pratiques!
 
-Pour établir des conditions avant et après chaque tests on peut utiliser les méthodes setUp() et tearDown(). Pour vérifier notre assertion on utilise la méthode assertIn(). Pour faire échouer volontairement notre test on peut utiliser la méthode fail().
+Pour établir des conditions avant et après chaque test, on peut utiliser les méthodes setUp() et tearDown(). Pour vérifier notre assertion on utilise la méthode assertIn(). Pour faire échouer volontairement notre test on peut utiliser la méthode fail().
 
 ### <font style="color: red;"> Pour résumer:</font>  
-on va placer nos test dans une classe qui hérite de unnittest.[TestCase](https://docs.python.org/fr/3.6/library/unittest.html#unittest.TestCase), celle ci va nous fournir des méthodes de configuration et d'[assertion](https://docs.python.org/fr/3.6/library/unittest.html#assert-methods) pratiques. Nos test devront avoir des noms explicites et commençant par test_ pour être exécutés.
+On va placer nos tests dans une classe qui hérite de unnittest.[TestCase](https://docs.python.org/fr/3.6/library/unittest.html#unittest.TestCase), celle-ci va nous fournir des méthodes de configuration et d'[assertion](https://docs.python.org/fr/3.6/library/unittest.html#assert-methods) pratiques. Nos tests devront avoir des noms explicites et commençant par test_ pour être exécutés.
 
-Voila vous avez compris, maintenant essayons le notre nouveau FT!
+Voilà vous avez compris, maintenant essayons-le notre nouveau FT!
 >functional_tests.py
 ```bash
 $ python functional_tests.py 
@@ -114,15 +114,15 @@ Ran 1 test in 4.254s
 FAILED (failures=1)
 ```
 
-Ahhhh, le test est un echec comme prévu, mais au moins c'est plus lisible, voir beau !
+Ahhhh, le test est un échec comme prévu, mais au moins c'est plus lisible, voir beau !
 
-Faisons un commit avant de prendre un petite pause bien méritée:  
+Faisons un commit avant de prendre une petite pause bien méritée:  
  ☕
 
 ```bash
 $ git commit -am "FT with unittest"
 ```
-l'option -a c'est pour ajouter les fichier déjà suivi!
+l'option -a c'est pour ajouter les fichiers déjà suivis!
 
 La suite au chapitre [suivant](chap3.md)
 

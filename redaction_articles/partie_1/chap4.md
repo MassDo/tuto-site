@@ -1,11 +1,11 @@
 # Chapitre 4 - Réusinage du code et templates
 
-Pourquoi tout ces tests ?
-Vous pouvez penser que la méthode est trop lente , mais au final la complexité croissantes des interactions peut aboutir à l'impossibilité de réusiner son code (modification du code sans changement de fonctionnalités).  Plus un système devient complexe et moins vous pourrez avoir l'intégralité des intéractions en mémoire, les erreurs seront inévitable et sans tests trouver leur origine sera impossible.  
+Pourquoi tous ces tests ?
+Vous pouvez penser que la méthode est trop lente , mais au final la complexité croissante des interactions peut aboutir à l'impossibilité de réusiner son code (modification du code sans changement de fonctionnalités).  Plus un système devient complexe et moins vous pourrez avoir l'intégralité des intéractions en mémoire, les erreurs seront inévitables, et sans tests trouver leur origine sera impossible.  
 
-Le TDD limite la taille du code, guide dans la conception et réduit la "dette technique" c'est à dire le temps qu'il faudra utiliser pour effectuer les maintenances corrective et évolutive dans le futur.
+Le TDD limite la taille du code, guide dans la conception et réduit la "dette technique" c'est-à-dire le temps qu'il faudra utiliser pour effectuer les maintenances correctives et évolutives dans le futur.
 
-Allez on retourne au boulot. Humm d'ailleurs je suis un peu perdu mais on en était où déjà ? Ah oui utilisons notre TF pour savoir ! (Encore eux lol)  
+Allez on retourne au boulot! Humm d'ailleurs je suis un peu perdu, mais on en était où déjà ? Ah oui ! utilisons notre TF pour savoir.  
 
 
 ```bash
@@ -24,10 +24,10 @@ Ran 1 test in 4.383s
 
 FAILED (failures=1)
 ```
-(Si vous avez une erreur vérifiez que vous avez bien lancé le server dans un autre shell avec  ```$ ./manage.py runserver```)
+(Si vous avez une erreur, vérifiez que vous avez bien lancé le serveur dans un autre shell avec  ```$ ./manage.py runserver```)
 
 Ok notre TF échoue volontairement du fait de la méthode fail avec le message 'Finish the test'.  
-Ah oui ca me revient, notre test vérifiant 'To-Do' dans le titre de la page est passé, mais il reste la suite de la user storie à tester.
+Ah oui, ça me revient, notre test vérifiant 'To-Do' dans le titre de la page est passé, mais il reste la suite de la user storie à tester.
 > A faire:
 >  - [ ] Continuer la rédaction du TF pour le reste de la US.  
 > 
@@ -94,9 +94,9 @@ On va pouvoir manipuler les éléments du DOM grâce à des méthodes de notre i
 
 On va aussi simuler [la manipulation du clavier](https://www.selenium.dev/documentation/fr/webdriver/keyboard/) en utilisant la méthode send_keys() et la classe Keys, (ne pas oublier de l'importer !), pour les touches spéciales.
 
-Le time.sleep est là pour être sur, que le navigateur ait le temps de charger la page, avant de faire l'assertion de test qui suit.
+Le time.sleep est là pour être sûr, que le navigateur ait le temps de charger la page, avant de faire l'assertion de test qui suit.
 
-Enfin, attention, la methode find_elements_by_tag_name() retourne une liste d'éléments.
+Enfin, attention, la méthode find_elements_by_tag_name() retourne une liste d'éléments.
 
 ### On lance le TF: 
 ```bash
@@ -105,25 +105,25 @@ $ python functional_tests.py
 selenium.common.exceptions.NoSuchElementException: Message: Unable to locate element: h1
 ```
 
-Alors le TF n'arrive pas a trouver un header. C'était prévu. Onvient de faire un gros changement de notre Test Fonctionnel et en général il vaut mieux faire un commit à la suite.
+Alors le test fonctionnel n'arrive pas à trouver un header. C'était prévu. On vient de faire un gros changement de notre Test Fonctionnel et en général il vaut mieux faire un commit à la suite.
 ```bash
 $ git commit -am "TF improvement
 > FT now checks that visitor can add item to page."
 ```
-Et on peut cocher notre liste ca fait toujours du bien :)
+Et on peut cocher notre liste ça fait toujours du bien :)
 > A faire:
 >- [x] Continuer la rédaction du TF pour le reste de la US. 
 
 
 # Réusinage de code: Utilisation des templates.
 
-On va s'interesser au "réusinage de code" ou refactoring en anglais. Cette étape consiste à __améliorer__ notre code sans que la __fonctionnalité__ de celui ci soit changé.  
+On va s'intéresser au "réusinage de code" ou "refactoring" en anglais. Cette étape consiste à __améliorer__ notre code sans que la __fonctionnalité__ de celui-ci soit changée.  
 
-Aller un petit croquis pour rappeler le processus BDD et TDD: 
+Allez, un petit croquis pour rappeler le processus BDD et TDD: 
 
 <image src="./images/BDD-TDD.png" title="BDD-TDD" alt="BDD-TDD" style="border-radius:10px" border="2 solid" width="800">  
 
-Une rèlgle importante est de ne pas tester des constantes, mais la logique du code, le controle du flux des données et les configurations. cela paraît une évidence mais nous l'avons fait dans nos tests unitaires lorsque nous avons testé notre vue et le html en dur quelle renvoyait.
+Une rèlgle importante est de ne pas tester des constantes, mais la logique du code, le contrôle du flux des données et les configurations. Cela paraît une évidence mais nous l'avons fait dans nos tests unitaires lorsque nous avons testé notre vue, et le html en dur qu'elle renvoyait.
 
 Pour générer les pages html nous allons utiliser les [templates](https://docs.djangoproject.com/fr/3.0/topics/templates/) (gabarits en français)
 
@@ -142,28 +142,28 @@ Un exemple:
 >>> template.render(context)
 "My name is Dolores."
 ```
-On utilise ici le même gabarits pour générer une phrase, seule la variable "my_name" de l'objet context change.
+On utilise ici le même gabarit pour générer une phrase, seule la variable "my_name" de l'objet context change.
 
-Vous pouvez aussi faire [hériter](https://docs.djangoproject.com/fr/3.0/ref/templates/language/#template-inheritance) les templates entre eux pour les superposer et éviter de réécrire plusieurs fois le meme contenu HTML.
+Vous pouvez aussi faire [hériter](https://docs.djangoproject.com/fr/3.0/ref/templates/language/#template-inheritance) les templates entre eux pour les superposer et éviter de réécrire plusieurs fois le même contenu HTML.
 
-Pour illustrer l'héritage de templates, je vous propose un croquis d'un théatre à l'italienne (vous allez comprendre !):  
+Pour illustrer l'héritage de templates, je vous propose un croquis d'un théâtre à l'italienne (vous allez comprendre !):  
 
 <image src="./images/theatre.jpg" title="BDD-TDD" alt="BDD-TDD" style="border-radius:10px" border="2 solid" width="800">  
 Les décors sont coulissants et peuvent se superposer à une toile de fond ou à d'autres décors !
-La production de visuels est modulaire! Les templates c'est le meme systeme, mais on peut en plus changer dynamiquement chaque décors !  
+La production de visuels est modulaire! Les templates, c'est le même système, mais on peut en plus changer dynamiquement chaque décor !  
 
 
-Allez je vous mets la coupe de l'Opéra Garnier, juste parce que c'est beau, à vous de trouver où sont les "templates":  
+Allez, je vous mets la coupe de l'Opéra Garnier, juste parce que c'est beau, à vous de trouver où sont les "templates":  
 
 <image src="./images/garnier.jpg" title="BDD-TDD" alt="BDD-TDD" style="border-radius:10px" border="2 solid" width="800"> 
 
 
-Bon c'est bien beau tout ca mais revenons a notre code. 
+Bon c'est bien beau tout ça mais revenons à notre code. 
 > A faire:
 >- [ ] Refactorer notre vue en utilisant les templates  
 
 
-Nous allons créer un dossier templates dans notre application et y ajouter un fichier home.html ou nous allons mettre notre HTML:  
+Nous allons créer un dossier templates dans notre application et y ajouter un fichier home.html où nous allons mettre notre HTML:  
 > lists/templates/home.html  
 ```html
 <html>
@@ -180,7 +180,7 @@ def home_page(request):
 ```
 On utilise la fonction [render](https://docs.djangoproject.com/fr/3.1/topics/http/shortcuts/#django.shortcuts.render) qui va retourner un objet HttpResponse et rechercher automatiquement les templates dans les répertoires /templates de nos applications.
 
-On lance les tests unitaires pour voir si ca marche :  
+On lance les tests unitaires pour voir si ça marche :  
 ```bash
 $ ./manage.py test lists/
 Creating test database for alias 'default'...
@@ -202,10 +202,10 @@ Traceback (most recent call last):
     raise TemplateDoesNotExist(template_name, chain=chain)
 django.template.exceptions.TemplateDoesNotExist: home.html
 ```
-Arggh ca ne fonctionne pas ! Pourtant on a bien mis notre template home.html dans un dossier lists/templates et notre vue utilise la fonction render() qui va chercher automatiquement les templates s'ils sont dans un dossier /templates... Bon bah il va falloir lire l'erreur en détail ...  
+Arggh, ça ne fonctionne pas ! Pourtant on a bien mis notre template home.html dans un dossier lists/templates et notre vue utilise la fonction render() qui va chercher automatiquement les templates s'ils sont dans un dossier /templates... Bon bah, il va falloir lire l'erreur en détail ...  
 > - On fait appel à notre vue home_page
 > - Elle retourne la fonction render avec notre template home.html
-> - Après nous avons ``` content = loader.render_to_string([...]) ```, ici django utilise un loader pour trouver le template, c'est à partir de la que ca bloque...
+> - Après nous avons ``` content = loader.render_to_string([...]) ```, ici django utilise un loader pour trouver le template, c'est à partir de là que ça bloque...
 
 En fait le [loader](https://docs.djangoproject.com/fr/3.1/ref/templates/api/#django.template.loaders.app_directories.Loader) va pouvoir trouver les dossiers /templates de nos applications uniquement si celles-ci sont installées. En effet lors de la création de notre app 'lists' à l'aide de ```./startapp lists``` nous ne l'avons pas ajoutée à notre projet. Pour cela il faut simplement rajouter, le nom de notre app au fichier /superlists/settings.py dans la variable INSTALLED_APPS :  
 > superlists/settings.py
@@ -229,7 +229,7 @@ $ ./manage.py test lists/
 [...]
 OK
 ```
-Top ! On a réussie a réfactorer en utilisant les templates ! (Si vous avez une erreur peut etre que vous avez rajouté des lignes vides à la fin de votre fichier home.html ?)
+Top ! On a réussi à réfactorer en utilisant les templates ! (Si vous avez une erreur peut-être que vous avez rajouté des lignes vides à la fin de votre fichier home.html ?)
 
 > A faire:
 >- [x] Refactorer notre vue en utilisant les templates  
@@ -239,7 +239,7 @@ Nous avons refactoré notre code, mais nos tests unitaires continuent de vérifi
 >- [x] Refactorer notre vue en utilisant les templates 
 >-  [ ] Refactorer nos tests unitaires.
 
-Allez on refactor nos tests unitaires:  
+Allez, on refactor nos tests unitaires:  
 >lists/tests.py
 ```python
 # from django.http import HttpRequest
@@ -266,8 +266,8 @@ class HomePageTest(TestCase):
         self.assertTemplateUsed(response, 'home.html')
 ```
 j'ai mis en commentaires les portions de test inutiles après réusinage du code.  
-En effet, on utilise maintenant le [client](https://docs.djangoproject.com/fr/3.1/topics/testing/tools/) de test "client" qui se comporte comme un navigateur simple. On comprend que si la reponse du client, pour une requête GET de l'url racine, possède bien le template 'home.html'.  
-Alors toutes les autres lignes sont vérifiées et elles deviennent superficielles, ont peut les supprimer ! (elles étaient la pour avancer doucement et comprendre le cheminement des objets [HttpRequest](https://docs.djangoproject.com/fr/3.1/ref/request-response/#django.http.HttpRequest) et [HttpResponse](https://docs.djangoproject.com/fr/3.1/ref/request-response/#django.http.HttpResponse))
+En effet, on utilise maintenant le [client](https://docs.djangoproject.com/fr/3.1/topics/testing/tools/) de test "client" qui se comporte comme un navigateur simple. On comprend que si la réponse du client, pour une requête GET de l'url racine, possède bien le template 'home.html'.  
+Alors toutes les autres lignes sont vérifiées et elles deviennent superficielles, on peut les supprimer ! (elles étaient là pour avancer doucement et comprendre le cheminement des objets [HttpRequest](https://docs.djangoproject.com/fr/3.1/ref/request-response/#django.http.HttpRequest) et [HttpResponse](https://docs.djangoproject.com/fr/3.1/ref/request-response/#django.http.HttpResponse))
 
 Notre classe de tests unitaires ressemble maintenant à cela:
 >lists/tests.py
@@ -299,7 +299,7 @@ selenium.common.exceptions.NoSuchElementException: Message: Unable to locate ele
 >- [x] Refactorer notre vue en utilisant les templates 
 >- [x] Refactorer nos tests unitaires.  
 
-Ah ca fait du bien de cocher une case.
+Ah, ça fait du bien de cocher une case.
 On a refactoré notre code et nos test unitaires, en général c'est un bon moment pour un commit:  
 ```bash
 $ git add .
@@ -310,9 +310,9 @@ $ git commit -m "Refactor home_view to use template
 > Refactor the unit tests"
 ```
 
-Pour résumer, notre test unitaire teste le comportement de notre code au lieu de tester des constante. 
+Pour résumer, notre test unitaire teste le comportement de notre code au lieu de tester des constantes. 
 
-La disposition et le contenu de nos pages doit lui être testé du coté vision utilisateur donc coté test fonctionnel. Celui ci échoue car il ne trouve pas de header h1 dans notre page avec la mention 'To-Do'. Changeons ça ! ( et ajoutons 'Your To-Do list' au lieu d'un simple titre 'To-Do' c'est mieux )  
+La disposition et le contenu de nos pages doit, lui, être testé du côté vision utilisateur donc côté test fonctionnel. Celui-ci échoue car il ne trouve pas de header h1 dans notre page, avec la mention 'To-Do'. Changeons ça ! ( et ajoutons 'Your To-Do list' au lieu d'un simple titre 'To-Do' c'est mieux )  
 >lists/templates/home.html
 ```html
 <html>
@@ -324,7 +324,7 @@ La disposition et le contenu de nos pages doit lui être testé du coté vision 
     </body>
 </html>
 ```
-__On lance le test fonctionnel__  
+__On lance le test fonctionnel :__  
 ```bash
 $ python functional_tests.py 
 [...]
@@ -382,7 +382,8 @@ $ python functional_tests.py
     any(r.text == '1: Acheter du pain' for r in rows)
 AssertionError: False is not true
 ```
-Il ne trouve pas de ligne dans le tableau qui contienne "1: Acheter du pain". Après que l'utilisateur (via selenium) ai envoyé "Acheter du pain" dans le champ de saisie de texte.
+Il ne trouve pas de ligne dans le tableau qui contient "1: Acheter du pain".   
+Après que l'utilisateur (via selenium) ait envoyé "Acheter du pain" dans le champ de saisie de texte.  
 Vous sentez bien que là on est plus dans de l'implémentation de l'HTML de notre template. Il va falloir traiter formulaire soumis par l'utilisateur.... Ca tombe bien c'est le but du chapitre suivant !!! 
 
 Allez un commit, une pause, et on passe à la suite ! :)

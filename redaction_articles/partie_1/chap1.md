@@ -1,8 +1,8 @@
 # chapitre 1 - Django et test fonctionnel.
 
-Le but de ce tuto est de découvrir le TDD (et un peu de BDD aussi). Pour cela nous allons utiliser une application web toute simple; une todo liste! Et oui !
+Le but de ce tuto est de découvrir le TDD (et un peu de BDD aussi). Pour cela nous allons utiliser une application web toute simple; une todo liste! Eh oui !
 ## BDD, stories, scénarios et tests fonctionnels !
-Pour simplifier, le BDD (Behavior Driven development) est basé sur des stories. Ce sont de petites phrases descriptives, où l'on se demande du point de vu de l'utilisateur  __qui__ veut __quoi__ et __pouquoi__. On peut les formaliser ainsi:  
+Pour simplifier, le BDD (Behavior Driven development) est basé sur des stories. Ce sont de petites phrases descriptives, où l'on se demande du point de vue de l'utilisateur  __qui__ veut __quoi__ et __pouquoi__. On peut les formaliser ainsi:  
 
 > En tant que <font color="DC143C">[type d'utilisateur]</font>, je veux <font color="483D8B">[une action]</font> afin que <font color="008000">[un bénéfice, une valeur]</font>
 
@@ -16,15 +16,15 @@ Et elles doivent répondre au sigle "INVEST", dans la belle langue de shakespear
 
 (Un exemple arrive un peu de patience)
 
-Ces stories pourront etre détaillées en scénarios, ou l'on précisera un __acteur__ des __actions__ et des __conséquences__ avec les fameux mots clés __GIVEN__, __WHEN__, __THEN__ ... (vous en avez forcément entendu parler)
+Ces stories pourront être détaillées en scénarios, où l'on précisera un __acteur__ des __actions__ et des __conséquences__ avec les fameux mots clés __GIVEN__, __WHEN__, __THEN__ ... (vous en avez forcément entendu parler)
 
 Nous pouvons voir les stories comme des désirs d'utilisation et les scénarios comme les descriptions de leur réalisation.
 
-Et les tests fonctionnels dans tout ca ?
+Et les tests fonctionnels dans tout ça ?
 
-j'allais le dire ! Les tests fonctionnels sont la pour valider les scenarios. Voila c'est tout.
+j'allais le dire ! Les tests fonctionnels sont là pour valider les scénarios. Voilà c'est tout.
 
-Oula, c'est assez abstrait tout ça, peut etre qu'un exemple serait utile...  
+Houlà, c'est assez abstrait tout ça, peut-être qu'un exemple serait utile...  
 
 Ca tombe bien, j'ai une mémoire de poisson rouge et je veux faire une todo-list, accessible par navigateur web, pour me souvenir de ce que je dois faire !
 
@@ -48,14 +48,14 @@ Scénario "Robert ajoute une note":
 >   - <font color="008000">__Et__</font> il peut à nouveau ajouter une note dans une zone de texte.
 
 Scénario "Robert veut retrouver ses notes":
-> - <font color="DC143C">__Etant donné__</font> Robert, notre visiteur qui est de retour sur notre page d'accueil, après une semaine de vacance dans le juras sous la pluie.
+> - <font color="DC143C">__Etant donné__</font> Robert, notre visiteur qui est de retour sur notre page d'accueil, après une semaine de vacances dans le Jura sous la pluie.
 > - <font color="483D8B">__Quand__</font> il ajoute 3 notes via notre page d'accueil
 > - <font color="008000">__Alors__</font> ses notes sont ajoutées 
->   - <font color="008000">__Et__</font> il obtient une url unique grace au numéro d'identification de sa liste
+>   - <font color="008000">__Et__</font> il obtient une url unique grâce au numéro d'identification de sa liste
 
 Chaque scénario fera l'objet d'un test de validation automatique. Nous utiliserons pour cela Selenium.
 
-Mais, nous nous allons trop vite là ! Patience... 
+Mais, nous allons trop vite là ! Patience... 
 
 Et le __TDD__ (Test Driven Development) dans tout ça ?!
 
@@ -69,7 +69,7 @@ Maintenant que nous savons créer notre environnement virtuel,  que nous avons n
 
 ## Un test en premier !
 
-Vous étiez tenté de commencer directement la création du projet django, mais ca serait déroger au mantra "Un test en premier !"
+Vous étiez tenté de commencer directement la création du projet django, mais ce serait déroger au mantra "Un test en premier !"
 
 Nous allons donc créer dans notre dossier racine ./todo-tdd un fichier functional_tests.py dans lequel nous allons ajouter:
 
@@ -97,16 +97,16 @@ Traceback (most recent call last):
     raise exception_class(message, screen, stacktrace)
 selenium.common.exceptions.WebDriverException: Message: Reached error page: about:neterror?e=connectionFailure&u=http%3A//localhost%3A8000/& [...]
 ```
-Ok, on vient de voir une fenêtre firefox s'ouvrir toute seule, et qui essaye de se connecter sans succes au localhost.
-Dans la console on voit une erreur. Bon c'est pas très lisible mais on comprend que ca ne fonctionne pas !  
- On arrive tout de même à lire connectionFailure à la fin ...
+Ok, on vient de voir une fenêtre firefox s'ouvrir toute seule, et qui essaie de se connecter sans succès au localhost.
+Dans la console on voit une erreur. Bon ce n'est pas très lisible mais on comprend que ça ne fonctionne pas !  
+On arrive tout de même à lire connectionFailure à la fin ...
 
 Maintenant qu'on a un test en échec, on peut écrire le code minimal pour que celui-ci passe.  
 Dans notre cas essayons:
 ```bash
 django-admin.py startproject superlists .
 ```
-Cet outil de django permet de creer un projet "superlists" dans notre répertoire courant grace au point à la fin. Ne l'oubliez pas sinon django créera un répertoire ./todo-tdd/superlists dans lequel il mettra le projet superlists, un répertoire en trop pour nous...
+Cet outil de django permet de créer un projet "superlists" dans notre répertoire courant grâce au point à la fin. Ne l'oubliez pas sinon django créera un répertoire ./todo-tdd/superlists dans lequel il mettra le projet superlists, un répertoire en trop pour nous...
 
 L'arborescence de votre projet doit donc ressembler à cela:  
 > ./todo-tdd
@@ -142,12 +142,12 @@ Quit the server with CONTROL-C.
 ```
 
 On peut pour l'instant ignorer le message sur les migrations nous en parlerons plus tard quand nous aborderons la base de données.  
-Notre serveur est normalement en service en local ! Lançonsnotre test fonctionnel depuis un nouveau shell, pour voir s'il passe ! (si vous fermez la console où le serveur est lancé alors vous allez l'arreter)
+Notre serveur est normalement en service en local ! Lançons notre test fonctionnel depuis un nouveau shell, pour voir s'il passe ! (si vous fermez la console où le serveur est lancé, alors vous allez l'arrêter)
 >./todo-tdd
 ```bash
 $ python functional_tests.py
 ``` 
-Une fenetre Firefox s'ouvre et se connecte a notre site, vous pouvez voir Django dans le tritre de l'onglet et une petite fusée ! La console n'affiche plus d'erreur, ouf, toute mes félicitations c'est notre premier test qui passe !!  
+Une fenètre Firefox s'ouvre et se connecte à notre site, vous pouvez voir Django dans le titre de l'onglet et une petite fusée ! La console n'affiche plus d'erreur, ouf, toute mes félicitations, c'est notre premier test qui passe !!  
 
 <image src="images/django-launch-chap1.png" alt="Django-launched-local-server" title="Django launched on local dev server" style="border-radius:10px" border="2 solid" width="800">
 
@@ -169,15 +169,15 @@ $ ls
 db.sqlite3           geckodriver.log  Pipfile       superlists
 functional_tests.py  manage.py        Pipfile.lock
 ```
-On voit plusieurs fichers que l'ont ne veut pas commiter; db.sqlite3 est le ficher de la base de donnée, et geckodriver.log celui des logs de notre browser de test.   
+On voit plusieurs fichers que l'on ne veut pas commiter; db.sqlite3 est le ficher de la base de données, et geckodriver.log celui des logs de notre browser de test.   
 
-Pour les ignorer lors de nos commits, ajoutons les à un ficher .gitignore:
+Pour les ignorer lors de nos commits, ajoutons-les à un ficher .gitignore:
 
 ```bash
 $ echo geckodriver.log >> .gitignore
 $ echo db.sqlite3 >> .gitignore
 ```
-Le double chevron '>>' ajoute à __la suite__ d'un ficher ( et le crée si il n'éxiste pas )
+Le double chevron '>>' ajoute à __la suite__ d'un ficher (et le crée s'il n'existe pas)
 
 ```bash
 $ git status
@@ -197,7 +197,7 @@ Fichiers non suivis:
 
 aucune modification ajoutée à la validation mais des fichiers non suivis sont présents (utilisez "git add" pour les suivre)
 ```
-Voila les fichers geckodriver.log et db.sqlite3 ne sont plus présents, nous pouvont ajouter les fichers et les commiter:
+Voila les fichers geckodriver.log et db.sqlite3 ne sont plus présents, nous pouvons ajouter les fichers et les commiter:
 ```bash
 $ git add .
 $ git commit -m "First commit: First FT and basic Django config"
@@ -210,7 +210,7 @@ Et l'envoyer:
 ```bash
 $ git push origin master
 ```
-C'est fini ! Vous pouvez mettre votre siege en position horizontale et vous congratuler le premier chapitre est terminé. Vous avez établie une mise en place basique d'un projet django grace a un test fonctionel et commité tout ca. Un petite pause et on continue avec le [chapitre 2](chap2.md)
+C'est fini ! Vous pouvez mettre votre siège en position horizontale et vous congratuler, le premier chapitre est terminé. Vous avez établi une mise en place basique d'un projet Django grâce à un test fonctionel et commité tout ça. Une petite pause et on continue avec le [chapitre 2](chap2.md)
 
 
 

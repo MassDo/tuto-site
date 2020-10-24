@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
+    <meta charset="UTF-8"> 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     {% block style %}{% endblock style %}
@@ -13,17 +13,18 @@
     <div class="block" style="max-width: 800px;">
         <body>
             <nav>
-                <ul>
-                    <li><a href="/chaps/1">Prerequisites</a></li>
-                    <li><a href="/chaps/2">Chap1</a></li>
-                    <li><a href="/chaps/3">Chap2</a></li>
-                    <li><a href="/chaps/4">Chap3</a></li>
-                    <li><a href="/chaps/5">Chap4</a></li>
-                    <li><a href="/chaps/6">Chap5</a> </li>            
+                <ul>                    
+                    <li><a href="{% url 'prerequisites' %}">Prerequisites</a></li>                        
+                    <li><a href="{% url 'article-detail' 1 %}">Chapitre 1 - Django et test fonctionnel.</a></li>
+                    <li><a href="{% url 'article-detail' 2 %}">Chap2</a></li>
+                    <li><a href="{% url 'article-detail' 3 %}">Chap3</a></li>
+                    <li><a href="{% url 'article-detail' 4 %}">Chap4</a></li>
+                    <li><a href="{% url 'article-detail' 5 %}">Chap5</a></li>        
                 </ul>  
             </nav>
             
             {% block article %}{% endblock article %}
+            <a href="{% url 'home' %}">Accueil</a>
         </body>
     </div>
 </div>

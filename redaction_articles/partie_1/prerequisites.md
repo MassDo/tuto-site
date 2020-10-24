@@ -20,17 +20,17 @@ Pour pipenv:
 ```bash
 $ pip install --user pipenv
 ```
-Si la commande __pipenv__ n'est pas accessible par la suite pas d'inquietude !
+Si la commande __pipenv__ n'est pas accessible par la suite pas d'inquiétude !
 Il faut ajouter le repertoire utilisateur des binaires à votre [variable d'environnement](https://doc.ubuntu-fr.org/variables_d_environnement) PATH.
 
 L'ajout du répertoire au PATH se fait comme cela:
 ```bash
 $ echo 'export PATH="$PATH:$(python -m site --user-base)/bin"' >> ~/.profile
 ```
-Avec cette commande on récupère le chemin des binaires de l'utilisateur __$(python -m site --user-base)/bin__, on l'ajoute à la variable PATH dans tous les environnements grace à ___export PATH=...___  et enfin on ajoute cette commande au fichier __~/.profile__ pour que cela soit valable à chaque nouveau shell de l'utilisateur.
+Avec cette commande on récupère le chemin des binaires de l'utilisateur __$(python -m site --user-base)/bin__, on l'ajoute à la variable PATH dans tous les environnements grâce à ___export PATH=...___  et enfin on ajoute cette commande au fichier __~/.profile__ pour que cela soit valable à chaque nouveau shell de l'utilisateur.
 
 Geckodriver:  
-Il peut etre téléchargé [ici](https://github.com/mozilla/geckodriver/releases/), ou [la](https://github.com/mozilla/geckodriver/releases/download/v0.27.0/geckodriver-v0.27.0-linux64.tar.gz) pour un lien direct. Vous devez ensuite le décompresser et l'ajouter à /usr/sys/bin
+Il peut être téléchargé [ici](https://github.com/mozilla/geckodriver/releases/), ou [la](https://github.com/mozilla/geckodriver/releases/download/v0.27.0/geckodriver-v0.27.0-linux64.tar.gz) pour un lien direct. Vous devez ensuite le décompresser et l'ajouter à /usr/sys/bin
 ```bash
 $ sudo tar -xvf geckodriver-v0.27.0-linux64.tar.gz -C /usr/local/bin
 ```
@@ -39,7 +39,7 @@ Vous pouvez maintenant supprimer l'archive dans le dossier où celle-ci a été 
 ## Mise en place de l'environnement virtuel:
 On va bientot pouvoir commencer ! Mais il nous reste encore à configurer l'environnement virtuel !  
 
-Vous pouvez le créer dans le dossier qui accueilleras votre projet (pour moi todo-tdd):
+Vous pouvez le créer dans le dossier qui accueillera votre projet (pour moi todo-tdd):
 ```bash
 pipenv --python 3.6 && \
 pipenv install "django==2.2" && \
@@ -57,7 +57,7 @@ Alors résumons nos dépendances:
 > - [x] Selenium 3
 > - [x] Geckodriver  
 > 
-Ouf voila ! Normalement c'est bon tout est en place pour enfin commencer 👌 ! Vous pouvez activer votre venv grace à __pipenv shell__ maintenant.
+Ouf voilà ! Normalement c'est bon tout est en place pour enfin commencer 👌 ! Vous pouvez activer votre venv grâce à __pipenv shell__ maintenant.
 
 Dans le prochain chapitre on commence les tests... Promis !  
 
